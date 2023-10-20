@@ -1,8 +1,8 @@
-numpy
-torch>=1.1
-numba
-tensorboardX
-easydict
-pyyaml
-scikit-image
-tqdm
+numpy==1.23.5
+# torch>=1.10.2
+numba==0.56.4
+tensorboardX==2.6
+easydict==1.10
+pyyaml==6.0
+scikit-image==0.20.0
+tqdm==4.65.0

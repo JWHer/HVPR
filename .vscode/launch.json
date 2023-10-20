@@ -1,0 +1,43 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Train",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            "env": {
+                "CUDA_VISIBLE_DEVICES": "1",
+            },
+            "args": [
+                "--cfg_file", "cfgs/kitti_models/hvpr_nuscenes.yaml",
+                "--batch_size", "1",
+                "--epochs", "1",
+                // "--gpu", "all",
+                "--fix_random_seed",
+            ],
+            "cwd": "${workspaceFolder}/tools",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        },
+        {
+            "name": "Train: nuscenes",
+            "type": "python",
+            "request": "launch",
+            "program": "train.py",
+            "args": [
+                "--cfg_file", "cfgs/kitti_models/hvpr_nuscenes.yaml",
+                "--batch_size", "1",
+                "--epochs", "1",
+                // "--gpu", "all",
+                "--fix_random_seed",
+            ],
+            "cwd": "${workspaceFolder}/tools",
+            "console": "integratedTerminal",
+            "justMyCode": false
+        }
+    ]
+}
