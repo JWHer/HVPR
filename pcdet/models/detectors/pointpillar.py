@@ -54,7 +54,7 @@ class MixAnchor_Memory(Detector3DTemplate):
             for cur_module in self.module_list[1:]:
                 batch_dict = cur_module(batch_dict)
             pred_dicts, recall_dicts, batch_dict = self.post_processing(batch_dict)
-            return pred_dicts, recall_dicts, batch_dict
+            return pred_dicts, recall_dicts
             
     def get_training_loss(self):
         disp_dict = {}

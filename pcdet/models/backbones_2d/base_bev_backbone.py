@@ -2,6 +2,8 @@ import numpy as np
 import torch
 import torch.nn as nn
 
+from .spatial_attention import SpatialAttention
+
 
 class BaseBEVBackbone(nn.Module):
     def __init__(self, model_cfg, input_channels):
@@ -218,6 +220,7 @@ class BaseBEVBackbone_Scale(nn.Module):
 
         self.num_bev_features = c_in
         self.attention = SpatialAttention()
+
     def forward(self, data_dict):
         """
         Args:

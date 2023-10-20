@@ -35,7 +35,7 @@ def train_one_epoch(model, optimizer, train_loader, model_func, lr_scheduler, ac
         model.train()
         optimizer.zero_grad()
 
-        loss, tb_dict, disp_dict, items = model_func(model, batch)
+        loss, tb_dict, disp_dict = model_func(model, batch)
 
         loss.backward()
         clip_grad_norm_(model.parameters(), optim_cfg.GRAD_NORM_CLIP)
@@ -58,7 +58,7 @@ def train_one_epoch(model, optimizer, train_loader, model_func, lr_scheduler, ac
                     tb_log.add_scalar('train/' + key, val, accumulated_iter)
     if rank == 0:
         pbar.close()
-    return accumulated_iter, items
+    return accumulated_iter
 
 
 def train_model(model, optimizer, train_loader, model_func, lr_scheduler, optim_cfg,
@@ -83,7 +83,7 @@ def train_model(model, optimizer, train_loader, model_func, lr_scheduler, optim_
                 cur_scheduler = lr_warmup_scheduler
             else:
                 cur_scheduler = lr_scheduler
-            accumulated_iter, items = train_one_epoch(
+            accumulated_iter = train_one_epoch(
                 model, optimizer, train_loader, model_func,
                 lr_scheduler=cur_scheduler,
                 accumulated_iter=accumulated_iter, optim_cfg=optim_cfg,
@@ -98,7 +98,7 @@ def train_model(model, optimizer, train_loader, model_func, lr_scheduler, optim_
             logger.info('**********************Epoch%d training finished**********************'
                 % (trained_epoch))
             logger.info('memory items(Epoch%d):  ' % (trained_epoch))
-            print(items[:20])
+            # print(items[:20])
             if trained_epoch % ckpt_save_interval == 0 and rank == 0:
 
                 ckpt_list = glob.glob(str(ckpt_save_dir / 'checkpoint_epoch_*.pth'))
